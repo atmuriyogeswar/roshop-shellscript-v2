@@ -10,16 +10,8 @@ cp nginx.conf /etc/nginx/nginx.conf &>>${log_file}
 
 nodejs  # Call the function to install Node.js
 
-echo -e "${hs}Downloading ${component_name} Code${he}" | tee -a ${log_file}
-curl -L -o /tmp/${component_name}.zip https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/${component_name}.zip
-rm -rf /tmp/${component_name} &>>${log_file}
+app_pre-req  # Call the function to set up application prerequisites
 
-echo -e "${hs}Setting up ${component_name}${he}" | tee -a ${log_file}
-mkdir -p /tmp/${component_name} &>>${log_file}
-cd /tmp/${component_name} &>>${log_file}
-
-echo -e "${hs}Extracting ${component_name}  Code${he}" | tee -a ${log_file}   
-unzip /tmp/${component_name}.zip
 echo -e "${hs}Installing ${component_name} Dependencies and Building${he}" | tee -a ${log_file}
 npm install
 npm run build 
