@@ -30,7 +30,4 @@ echo -e "${hs}Setting Permissions${he}" | tee -a ${log_file}
 chown -R appuser:appuser /app
 chmod o-rwx /app -R
 
-echo -e "${hs}Starting Catalogue Service${he}" | tee -a ${log_file}
-systemctl daemon-reload
-systemctl enable catalogue
-systemctl start catalogue
+systemd_service  # Call the function to set up the systemd service

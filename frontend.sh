@@ -8,9 +8,7 @@ dnf install -y nginx
 echo -e "${hs}Configuring Nginx${he}" | tee -a ${log_file}
 cp nginx.conf /etc/nginx/nginx.conf &>>${log_file}
 
-echo -e "${hs}Installing Node.js${he}" | tee -a ${log_file}
-curl -fsSL https://rpm.nodesource.com/setup_20.x | bash - >>${log_file}
-dnf install -y nodejs
+nodejs  # Call the function to install Node.js
 
 echo -e "${hs}Downloading ${component_name} Code${he}" | tee -a ${log_file}
 curl -L -o /tmp/${component_name}.zip https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/${component_name}.zip
@@ -30,6 +28,4 @@ rm -rf /usr/share/nginx/html/* &>>${log_file}
 echo -e "${hs}Deploying ${component_name}${he}" | tee -a ${log_file}
 cp -r out/* /usr/share/nginx/html/ &>>${log_file}
 
-echo -e "${hs}Starting Nginx${he}" | tee -a ${log_file}
-systemctl restart nginx
-systemctl enable nginx
+systemd_service  # Call the function to set up the systemd service
